@@ -3,7 +3,7 @@ import { GeometryIdentifier, Modular, NodeInterop } from 'nodi-modular';
 import { BufferGeometry } from 'three';
 import { convertGeometryInterop } from '@/utils/geometryUtils';
 import init from 'nodi-modular';
-import gridfinity from "@/assets/graph/gridfinity.json";
+import frame from "@/assets/graph/frame.json";
 
 // ジオメトリ情報の型を定義
 export interface GeometryWithId {
@@ -49,7 +49,7 @@ const importGraph = async (slug: string) => {
   } catch (error) {
     console.error(`Graph for ${slug} not found:`, error);
     // デフォルトのグラフを返す
-    return gridfinity;
+    return frame;
   }
 };
 

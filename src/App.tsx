@@ -17,19 +17,12 @@ const NotFound = () => (
 )
 
 // 動的インポートを静的にするためのマッピングオブジェクトを作成
-const pageComponents: Record<string, any> = {
-  bento3d: () =>
-    import("./pages/bento3d/index").then((module) => ({
+const pageComponents: Record<string, () => Promise<{ default: React.ComponentType }>> = {
+  frame: () =>
+    import("./pages/frame/index").then((module) => ({
       default: module.Page,
     })),
-  gridfinity: () =>
-    import("./pages/gridfinity/index").then((module) => ({
-      default: module.Page,
-    })),
-  tray: () =>
-    import("./pages/tray/index").then((module) => ({
-      default: module.Page,
-    })),
+  
 }
 
 // ModularInitializerコンポーネント - modularの初期化だけを担当
@@ -131,7 +124,7 @@ function App() {
     <div className="flex flex-col h-screen w-screen">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Navigate to="/tray" replace />} />
+          <Route path="/" element={<Navigate to="/frame" replace />} />
           <Route path="/:slug" element={<GraphRenderer />} />
         </Routes>
       </BrowserRouter>
