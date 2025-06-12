@@ -1,0 +1,237 @@
+[
+  {
+    "series": "Polymaker Panchroma",
+    "colors": [
+      {
+        "name": "ArmyBlue",
+        "hex": "#002E5E",
+        "threeHEX": "#002E5E",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/MMTZMUFV?aff=7670",
+        "sampleImage": "/images/samples/army-blue.png",
+        "ogImage": "/images/ogps/army-blue.png"
+      },
+      {
+        "name": "ArmyBrown",
+        "hex": "#6B4D33",
+        "threeHEX": "#6B4D33",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/M0D47KPY?aff=7670",
+        "sampleImage": "/images/samples/army-brown.png",
+        "ogImage": "/images/ogps/army-brown.png"
+      },
+      {
+        "name": "ArmyDarkGreen",
+        "hex": "#5A704D",
+        "threeHEX": "#5A704D",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/MY5NE1JQ?aff=7670",
+        "sampleImage": "/images/samples/army-dark-green.png",
+        "ogImage": "/images/ogps/army-dark-green.png"
+      },
+      {
+        "name": "ArmyLightGreen",
+        "hex": "#E2DD58",
+        "threeHEX": "#E2DD58",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/MKNRUMG1?aff=7670",
+        "sampleImage": "/images/samples/army-light-green.png",
+        "ogImage": "/images/ogps/army-light-green.png"
+      },
+      {
+        "name": "ArmyPurple",
+        "hex": "#2E303C",
+        "threeHEX": "#2E303C",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/MMD6T5XV?aff=7670",
+        "sampleImage": "/images/samples/army-purple.png",
+        "ogImage": "/images/ogps/army-purple.png"
+      },
+      {
+        "name": "ArmyRed",
+        "hex": "#C9554E",
+        "threeHEX": "#C9554E",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/MC8WKQY4?aff=7670",
+        "sampleImage": "/images/samples/army-red.png",
+        "ogImage": "/images/ogps/army-red.png"
+      },
+      {
+        "name": "ArcticTeal",
+        "hex": "#73CEC4",
+        "threeHEX": "#73CEC4",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/M4WJSPWE?aff=7670",
+        "sampleImage": "/images/samples/arctic-teal.png",
+        "ogImage": "/images/ogps/arctic-teal.png"
+      },
+      {
+        "name": "CottonWhite",
+        "hex": "#DDE0DC",
+        "threeHEX": "#DDE0DC",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/M1W5HVYP?aff=7670",
+        "sampleImage": "/images/samples/cotton-white.png",
+        "ogImage": "/images/ogps/cotton-white.png"
+      },
+      {
+        "name": "ElectricIndigo",
+        "hex": "#7367B2",
+        "threeHEX": "#7367B2",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/MUR0ZJ4A?aff=7670",
+        "sampleImage": "/images/samples/electric-indigo.png",
+        "ogImage": "/images/ogps/electric-indigo.png"
+      },
+      {
+        "name": "LavenderPurple",
+        "hex": "#AF9DE3",
+        "threeHEX": "#AF9DE3",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/MTZA2HAG?aff=7670",
+        "sampleImage": "/images/samples/lavender-purple.png",
+        "ogImage": "/images/ogps/lavender-purple.png"
+      },
+      {
+        "name": "LotusPink",
+        "hex": "#FF91D4",
+        "threeHEX": "#FF91D4",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/MTS2GPL7?aff=7670",
+        "sampleImage": "/images/samples/lotus-pink.png",
+        "ogImage": "/images/ogps/lotus-pink.png"
+      },
+      {
+        "name": "SakuraPink",
+        "hex": "#E6CCE3",
+        "threeHEX": "#E6CCE3",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/MYPJUZDP?aff=7670",
+        "sampleImage": "/images/samples/sakura-pink.png",
+        "ogImage": "/images/ogps/sakura-pink.png"
+      },
+      {
+        "name": "SapphireBlue",
+        "hex": "#338FE8",
+        "threeHEX": "#338FE8",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/MKAC7KEK?aff=7670",
+        "sampleImage": "/images/samples/sapphire-blue.png",
+        "ogImage": "/images/ogps/sapphire-blue.png"
+      },
+      {
+        "name": "SavannahYellow",
+        "hex": "#E5DA55",
+        "threeHEX": "#E5DA55",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/M378UHM8?aff=7670",
+        "sampleImage": "/images/samples/savannah-yellow.png",
+        "ogImage": "/images/ogps/savannah-yellow.png"
+      },
+      {
+        "name": "SkyBlue",
+        "hex": "#62E3FF",
+        "threeHEX": "#62E3FF",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/M1YPR0U6?aff=7670",
+        "sampleImage": "/images/samples/sky-blue.png",
+        "ogImage": "/images/ogps/sky-blue.png"
+      },
+      {
+        "name": "MutedPurple",
+        "hex": "#B7A7C8",
+        "threeHEX": "#B7A7C8",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/MHA8618G?aff=7670",
+        "sampleImage": "/images/samples/muted-purple.png",
+        "ogImage": "/images/ogps/muted-purple.png"
+      },
+      {
+        "name": "MutedRed",
+        "hex": "#E78369",
+        "threeHEX": "#E78369",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/MP1WE1GL?aff=7670",
+        "sampleImage": "/images/samples/muted-red.png",
+        "ogImage": "/images/ogps/muted-red.png"
+      },
+      {
+        "name": "PastelBanana",
+        "hex": "#E1DC88",
+        "threeHEX": "#E1DC88",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/M3HGS5E2?aff=7670",
+        "sampleImage": "/images/samples/pastel-banana.png",
+        "ogImage": "/images/ogps/pastel-banana.png"
+      },
+      {
+        "name": "PastelCandy",
+        "hex": "#D7CEDF",
+        "threeHEX": "#D7CEDF",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/MA8QE2KX?aff=7670",
+        "sampleImage": "/images/samples/pastel-candy.png",
+        "ogImage": "/images/ogps/pastel-candy.png"
+      },
+      {
+        "name": "PastelIce",
+        "hex": "#A2D3DE",
+        "threeHEX": "#A2D3DE",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/M3TRVFH9?aff=7670",
+        "sampleImage": "/images/samples/pastel-ice.png",
+        "ogImage": "/images/ogps/pastel-ice.png"
+      },
+      {
+        "name": "PastelMint",
+        "hex": "#D5E6C1",
+        "threeHEX": "#D5E6C1",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/MQMCM3YD?aff=7670",
+        "sampleImage": "/images/samples/pastel-mint.png",
+        "ogImage": "/images/ogps/pastel-mint.png"
+      },
+      {
+        "name": "PastelPeach",
+        "hex": "#F8DEB5",
+        "threeHEX": "#F8DEB5",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/M37NJ9XQ?aff=7670",
+        "sampleImage": "/images/samples/pastel-peach.png",
+        "ogImage": "/images/ogps/pastel-peach.png"
+      },
+      {
+        "name": "PastelPeriwinkle",
+        "hex": "#424357",
+        "threeHEX": "#424357",
+        "metalness": 0,
+        "roughness": 0.5,
+        "url": "https://www.matterhackers.com/store/l/polymaker-panchroma-matte-pla-filament-175mm-1kg/sk/MLC1TQ9L?aff=7670",
+        "sampleImage": "/images/samples/pastel-periwinkle.png",
+        "ogImage": "/images/ogps/pastel-periwinkle.png"
+      }
+    ]
+  }
+]
