@@ -9,6 +9,7 @@ import frame from "@/assets/graph/frame.json";
 export interface GeometryWithId {
   id: GeometryIdentifier;  // stringではなくGeometryIdentifier型に修正
   geometry: BufferGeometry;
+  label: string;
 }
 export interface ManifoldGeometriesWithInfo {
   label: string
@@ -100,7 +101,7 @@ export const useModularStore = create<ModularState>((set, get) => ({
   },
 
   evaluateGraph: async () => {
-    const { modular, setGeometries } = get();
+    const { modular, setGeometries, nodes } = get();
     if (!modular) return;
     
     try {
@@ -110,13 +111,11 @@ export const useModularStore = create<ModularState>((set, get) => ({
       const gs = geometryIdentifiers!
         .map((id) => {
           const interop = modular.findGeometryInteropById(id);
-          const {transform} = id
+          const { transform } = id;
           const geometry = interop ? convertGeometryInterop(interop, transform) : null;
-          
-          return geometry ? { 
-            id, // ジオメトリ識別子をIDとして保存
-            geometry 
-          } : null;
+          const node = nodes.find(n => n.id === id.graphNodeSet?.nodeId);
+          const label = node?.label;
+          return geometry ? { id, geometry, label } : null;
         })
         .filter((g): g is GeometryWithId => g !== null);
         

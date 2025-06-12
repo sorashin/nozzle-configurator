@@ -1,18 +1,20 @@
 import { Canvas as ThreeCanvas } from "@react-three/fiber"
-import { OrbitControls, GizmoViewport, GizmoHelper } from "@react-three/drei"
+import { OrbitControls, GizmoViewport, GizmoHelper, Stage } from "@react-three/drei"
 
 import { useModularStore } from "@/stores/modular"
 import Model from "./Model"
-import { useEffect } from "react"
+import { useCallback, useEffect } from "react"
 import { Object3D } from "three"
 
 const Canvas = () => {
-  const { geometries } = useModularStore()
-  const renderGeometries = () => {
-    return geometries.map((geometry) => {
+  
+  const { manifoldGeometries } = useModularStore((state) => state)
+  const renderGeometries = useCallback(() => {
+    
+    return manifoldGeometries.map((geometry) => {
       return geometry.geometry
     })
-  }
+  }, [manifoldGeometries])
   useEffect(() => {
     Object3D.DEFAULT_UP.set(0, 0, 1) //Z軸を上にする
   }, [])
@@ -54,7 +56,15 @@ const Canvas = () => {
           args={[100, 100, "#555555", "#444444"]}
           rotation={[Math.PI / 2, 0, 0]}
         />
-        <Model geometries={renderGeometries()} />
+        <Stage
+          
+          intensity={0.5}
+          preset="rembrandt"
+          adjustCamera
+          shadows="contact"
+          environment="city">
+          <Model geometries={renderGeometries()} />
+        </Stage>
       </ThreeCanvas>
     </div>
   )

@@ -37,5 +37,26 @@ import {
     }
   };
 
+  function mesh2geometry(mesh: any) {
+  const geometry = new BufferGeometry()
+  geometry.setAttribute("position", new BufferAttribute(mesh.vertProperties, 3))
+  geometry.setIndex(new BufferAttribute(mesh.triVerts, 1))
+  return geometry
+}
 
-  export {convertGeometryInterop}
+// Convert Three.js BufferGeometry to Manifold Mesh
+function geometry2mesh(geometry: BufferGeometry) {
+  const positions = geometry.getAttribute("position")
+  const indices = geometry.getIndex()
+
+  const vertProperties = new Float32Array(
+    (positions.array as Float32Array).slice()
+  )
+  const triVerts = new Uint32Array(
+    indices ? (indices.array as Uint32Array).slice() : []
+  )
+
+  return { vertProperties, triVerts }
+}
+
+  export {convertGeometryInterop,mesh2geometry,geometry2mesh}
