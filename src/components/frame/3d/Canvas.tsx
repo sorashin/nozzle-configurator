@@ -1,44 +1,36 @@
 import { Canvas as ThreeCanvas } from "@react-three/fiber"
-import { OrbitControls, GizmoViewport, GizmoHelper, Stage, Box } from "@react-three/drei"
+import { OrbitControls, GizmoViewport, GizmoHelper, Environment, Stage } from "@react-three/drei"
 
 import { useModularStore } from "@/stores/modular"
 import Model from "./Model"
-import { useCallback, useEffect } from "react"
+import { useEffect } from "react"
 import { Object3D } from "three"
 import { Board } from "./elements/Board"
+import { ImagePlane } from "./elements/ImagePlane"
 
 const Canvas = () => {
   
   const { manifoldGeometries } = useModularStore((state) => state)
-  const renderGeometries = useCallback(() => {
-    
-    return manifoldGeometries.map((geometry) => {
-      return geometry.geometry
-    })
-  }, [manifoldGeometries])
   
   return (
     <div className="flex-1">
       <ThreeCanvas
-        orthographic
         camera={{
-          position: [0,0, 1000], // clipping 問題解決するため zを１００にする
-          fov: 40,
-          zoom: 10,
-          near: 0.01,
-          far: 100000,
+          position: [0, 0, 100],
+          fov: 45,
+          near: 0.1,
+          far: 1000,
         }}
         frameloop="demand">
-        {/* <color attach="background" args={["#1e293b"]} /> */}
         <ambientLight intensity={1.8} />
         <directionalLight
-          position={[50, 50, 50]}
+          position={[10, 10, 10]}
           intensity={1}
-          castShadow
-          shadow-mapSize-width={2048}
-          shadow-mapSize-height={2048}
+          castShadow={false}
         />
+        <Environment preset="studio" />
         <color attach="background" args={["#d9d9d9"]} />
+        {/* <fog attach="fog" args={["#d9d9d9", 400, 1000]} /> */}
         <GizmoHelper margin={[50, 100]} alignment="bottom-right" scale={0.5}>
           <GizmoViewport
             axisColors={["hotpink", "aquamarine", "#3498DB"]}
@@ -46,22 +38,32 @@ const Canvas = () => {
           />
         </GizmoHelper>
 
-        {/* <OrbitControls
+        <OrbitControls
           enableRotate={true}
           enablePan={true}
           enableZoom={true}
           zoomSpeed={0.5}
-        /> */}
-        <Board position={[0,0,-15]} scale={10} rotation={[0,Math.PI/2,0]}/>
+          minPolarAngle={Math.PI / 3}
+          maxPolarAngle={Math.PI * 2/3}
+          minAzimuthAngle={-Math.PI / 3}
+          maxAzimuthAngle={Math.PI / 3}
+          maxDistance={900} // カメラの最大ズームアウト距離を200に制限
+        />
+
         
+        <Board
+          position={[0, 0, -9.95]}
+          scale={10}
+          rotation={[0, Math.PI / 2, 0]}
+        />
+
         <Stage
-          intensity={0.5}
+          intensity={0}
           preset="rembrandt"
-          adjustCamera={1.2}
-          scale={0.5}
-          shadows="contact"
-          environment="city">
-          <Model geometries={renderGeometries()} />
+          adjustCamera={2}
+          scale={1}
+          shadows={false}>
+          <Model geometries={manifoldGeometries} />
         </Stage>
       </ThreeCanvas>
     </div>

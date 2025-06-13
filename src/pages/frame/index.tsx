@@ -159,28 +159,18 @@ export function Page() {
       console.error("Error processing geometry:", error)
       return null
     }
-  }, [frameState, geometries])
+  }, [manifoldModule, slug, geometries])
 
   //processTrayGeometry内でmanifoldGeometriesを更新してはいけないのでuseEffectで実行
   useEffect(() => {
-    
-    
-    if (slug === "frame") {
-      if (processGeometries) {
-        
-        setManifoldGeometries(
-          processGeometries.filter(
-            (g): g is { label: string; id: string; geometry: BufferGeometry } => g.geometry !== undefined
-          )
+    if (slug === "frame" && processGeometries) {
+      setManifoldGeometries(
+        processGeometries.filter(
+          (g): g is { label: string; id: string; geometry: BufferGeometry } => g.geometry !== undefined
         )
-      }
+      )
     }
   }, [slug, processGeometries])
-  useEffect(()=>{
-    if (manifoldGeometries.length > 0) {
-      setManifoldGeometries(manifoldGeometries)
-    }
-  },[])
 
   useEffect(() => {
     const initManifold = async () => {
