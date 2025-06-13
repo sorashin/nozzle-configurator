@@ -7,6 +7,9 @@ import { useSettingsStore } from "@/stores/settings"
 import { useParams } from "react-router-dom"
 import Module from "manifold-3d"
 import { geometry2mesh, mesh2geometry } from "@/utils/geometryUtils"
+import { PropertyPanel } from "@/components/frame/ui/PropertyPanel"
+import { BufferGeometry } from "three"
+import { RangeSlider } from "@/components/frame/ui/Slider"
 
 
 export function Page() {
@@ -49,7 +52,7 @@ export function Page() {
     const { Manifold, Mesh } = manifoldModule
     const frameGeometries = geometries
       .filter((geometry) =>
-        ["frame"].some((key) => geometry.label?.includes(key))
+        ["frame","screw","backBoard","stand"].some((key) => geometry.label?.includes(key))
       )
       .sort((a, b) => {
         const numA = parseInt(a.label?.match(/\d+/)?.[0] || "0")
@@ -94,13 +97,41 @@ export function Page() {
       for (const frame002 of frame002Manifolds) {
         frameResult = Manifold.difference(frameResult!, frame002)
       }
+      // backBoardの処理
+      const backBoard001Index = frameGeometries.findIndex(
+        (g) => g.label === "backBoard001"
+      )
+      const backBoard003Index = frameGeometries.findIndex(
+        (g) => g.label === "backBoard003"
+      )
+      const backBoard002s = frameGeometries.filter(
+        (g) => g.label === "backBoard002"
+      )
+      const backBoard002Manifolds = backBoard002s.map((g) => {
+        const { vertProperties, triVerts } = geometry2mesh(g.geometry)
+        const mesh = new Mesh({ numProp: 3, vertProperties, triVerts })
+        mesh.merge()
+        return new Manifold(mesh)
+      })
 
-      
+      let backBoardResult = manifolds[backBoard001Index]
+      for (const backBoard002 of backBoard002Manifolds) {
+        backBoardResult = Manifold.union(backBoardResult!, backBoard002)
+      }
 
-      // // latchのジオメトリを取得
-      // const latchGeometry = frameGeometries.find(
-      //   (g) => g.label === "latch"
-      // )?.geometry
+      backBoardResult = Manifold.difference(
+        backBoardResult!,
+        manifolds[backBoard003Index]!
+      )
+
+      // screwのジオメトリを取得
+      const screwGeometry = frameGeometries.find(
+        (g) => g.label === "screw"
+      )?.geometry
+      // standのジオメトリを取得
+      const standGeometries = frameGeometries.filter(
+        (g) => g.label === "stand"
+      ).map(g => g.geometry)
 
       return [
         {
@@ -108,15 +139,21 @@ export function Page() {
           id: "frame",
           geometry: mesh2geometry(frameResult!.getMesh()),
         },
-        // ...(latchGeometry
-        //   ? [
-        //       {
-        //         label: "latch",
-        //         id: "latch",
-        //         geometry: latchGeometry,
-        //       },
-        //     ]
-        //   : []),
+        {
+          label: "backBoard",
+          id: "backBoard",
+          geometry: mesh2geometry(backBoardResult!.getMesh()),
+        },
+        {
+          label: "screw",
+          id: "screw",
+          geometry: screwGeometry,
+        },
+        ...standGeometries.map((geometry, i) => ({
+          label: "stand",
+          id: `stand${i + 1}`,
+          geometry,
+        })),
       ]
     } catch (error) {
       console.error("Error processing geometry:", error)
@@ -130,18 +167,20 @@ export function Page() {
     
     if (slug === "frame") {
       if (processGeometries) {
-        //bento3dに関連するジオメトリを削除
-        const newManifoldGeometries = manifoldGeometries.filter(
-          (geometry) =>
-            !["frame", "lid", "box", "latch"].includes(geometry.label)
+        
+        setManifoldGeometries(
+          processGeometries.filter(
+            (g): g is { label: string; id: string; geometry: BufferGeometry } => g.geometry !== undefined
+          )
         )
-        setManifoldGeometries([
-          ...newManifoldGeometries,
-          ...processGeometries,
-        ])
       }
     }
   }, [slug, processGeometries])
+  useEffect(()=>{
+    if (manifoldGeometries.length > 0) {
+      setManifoldGeometries(manifoldGeometries)
+    }
+  },[])
 
   useEffect(() => {
     const initManifold = async () => {
@@ -155,16 +194,12 @@ export function Page() {
 
   return (
     <>
-      <input
-        className="absolute bottom-8 left-8 z-10"
-        type="range"
-        min={10}
-        max={200}
-        value={frameState.width}
-        onChange={(e) => updateFrame({ width: Number(e.target.value) })}
-        onMouseUp={handleDLView}
-        onTouchEnd={handleDLView}
-      />
+      
+      <PropertyPanel />
+      <div className="absolute inset-0  z-10 pointer-events-none">
+      <RangeSlider min={30} max={180} label={"width"} position={"bottom"} />
+      <RangeSlider min={30} max={180} label={"height"} position={"right"} />
+      </div>
       <Canvas />
     </>
   )

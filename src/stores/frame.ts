@@ -25,8 +25,8 @@ interface FrameStore {
 export const useFrameStore = create<FrameStore>((set) => ({
   // 初期状態
   type:0,
-  width:100,
-  height:150,
+  width:72,
+  height:142,
   mounting:"stand",
   cover:0,
   thickness:0.3,
