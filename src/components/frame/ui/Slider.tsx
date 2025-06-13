@@ -49,7 +49,7 @@ export const RangeSlider: React.FC<RangeSliderProps> = (props) => {
       case "left":
         return "fixed left-8 lg:left-16 top-1/2 -translate-y-1/2 h-14"
       case "right":
-        return "fixed right-8 lg:right-56 top-1/2 -translate-y-1/2 h-14"
+        return "fixed right-8 lg:right-16 top-1/2 -translate-y-1/2 h-14"
       case "top":
         return "fixed top-8 lg:top-16 left-1/2 -translate-x-1/2 w-32"
       case "bottom":
