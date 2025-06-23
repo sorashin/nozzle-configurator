@@ -10,7 +10,9 @@ import { ImagePlane } from "./elements/ImagePlane"
 
 const Canvas = () => {
   
-  const { manifoldGeometries } = useModularStore((state) => state)
+  const {  geometries } = useModularStore(
+    (state) => state
+  )
   
   return (
     <div className="flex-1">
@@ -44,26 +46,20 @@ const Canvas = () => {
           enableZoom={true}
           zoomSpeed={0.5}
           minPolarAngle={Math.PI / 3}
-          maxPolarAngle={Math.PI * 2/3}
+          maxPolarAngle={(Math.PI * 2) / 3}
           minAzimuthAngle={-Math.PI / 3}
           maxAzimuthAngle={Math.PI / 3}
           maxDistance={900} // カメラの最大ズームアウト距離を200に制限
         />
 
         
-        <Board
-          position={[0, 0, -10]}
-          scale={10}
-          rotation={[0, Math.PI / 2, 0]}
-        />
-
         <Stage
           intensity={0}
           preset="rembrandt"
           adjustCamera={2}
           scale={1}
           shadows={false}>
-          <Model geometries={manifoldGeometries} />
+          <Model geometries={geometries} />
         </Stage>
       </ThreeCanvas>
     </div>

@@ -3,7 +3,7 @@ import { GeometryIdentifier, Modular, NodeInterop } from 'nodi-modular';
 import { BufferGeometry } from 'three';
 import { convertGeometryInterop } from '@/utils/geometryUtils';
 import init from 'nodi-modular';
-import tecdia from "@/assets/graph/tecdia.json";
+import nozzle from "@/assets/graph/nozzle.json";
 
 // ジオメトリ情報の型を定義
 export interface GeometryWithId {
@@ -24,7 +24,10 @@ interface ModularState {
   geometries: GeometryWithId[];
   inputNodeId:string
   manifoldGeometries:ManifoldGeometriesWithInfo[]
-  
+  nodeIds:{
+    holeSize:string,
+    nozzleSize:string,
+  }
 
   // アクション
   setModular: (modular: Modular) => void;
@@ -32,6 +35,7 @@ interface ModularState {
   setGeometries: (geometries: GeometryWithId[]) => void;
 
   setInputNodeId: (inputNodeId:string) => void
+  setNodeIds: (nodeIds: { holeSize: string; nozzleSize: string }) => void
   setManifoldGeometries: (manifoldGeometries:ManifoldGeometriesWithInfo[]) => void
   
   // 複雑な操作
@@ -50,7 +54,7 @@ const importGraph = async (slug: string) => {
   } catch (error) {
     console.error(`Graph for ${slug} not found:`, error);
     // デフォルトのグラフを返す
-    return tecdia;
+    return nozzle;
   }
 };
 
@@ -60,6 +64,10 @@ export const useModularStore = create<ModularState>((set, get) => ({
   nodes: [],
   geometries: [],
   inputNodeId: "",
+  nodeIds:{
+    holeSize:"",
+    nozzleSize:""
+  },
   manifoldGeometries:[],
   setManifoldGeometries: (manifoldGeometries) => set({ manifoldGeometries }),
 
@@ -67,7 +75,7 @@ export const useModularStore = create<ModularState>((set, get) => ({
   setNodes: (nodes) => set({ nodes }),
   setGeometries: (geometries) => set({ geometries }),
   setInputNodeId: (inputNodeId) => set({ inputNodeId }),
-  
+  setNodeIds: (nodeIds) => set({ nodeIds }),
 
   initializeModular: async () => {
     await init();
@@ -75,7 +83,7 @@ export const useModularStore = create<ModularState>((set, get) => ({
   },
 
   loadGraph: async (slug = 'gridfinity') => {
-    const { modular, setNodes, setGeometries, setInputNodeId } = get();
+    const { modular, setNodes, setGeometries, setInputNodeId, setNodeIds } = get();
     if (!modular) return;
     
     try {
@@ -92,6 +100,12 @@ export const useModularStore = create<ModularState>((set, get) => ({
       const inputNode = nodes.find(node => node.label === "input");
       if (inputNode) {
         setInputNodeId(inputNode.id);
+      }
+      // "holeSize" ラベルを持つノードを検索
+      const holeSizeNode = nodes.find(node => node.label === "holeSize");
+      const nozzleSizeNode = nodes.find(node => node.label === "nozzleSize");
+      if (holeSizeNode && nozzleSizeNode) {
+        setNodeIds({ holeSize: holeSizeNode.id, nozzleSize: nozzleSizeNode.id });
       }
       
       get().evaluateGraph();

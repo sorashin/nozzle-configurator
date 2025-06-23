@@ -1,4 +1,4 @@
-import { ManifoldGeometriesWithInfo } from "@/stores/modular"
+import { GeometryWithId } from "@/stores/modular"
 import { Box, MeshTransmissionMaterial, Plane } from "@react-three/drei"
 
 import { ImagePlane } from "./elements/ImagePlane"
@@ -6,11 +6,11 @@ import { useNozzleStore } from "@/stores/nozzle"
 
 
 type ModelProps = {
-  geometries: ManifoldGeometriesWithInfo[]
+  geometries: GeometryWithId[]
 }
 
 export default function Model({ geometries }: ModelProps) {
-  const {width,height} = useNozzleStore()
+  
 
   return (
     <group rotation={[0, 0, 0]}>
@@ -20,17 +20,12 @@ export default function Model({ geometries }: ModelProps) {
           geometry={geometry.geometry}
           rotation={[-Math.PI / 2, 0, 0]}>
           
-            <meshStandardMaterial color={"pink"} flatShading={true} />
+            <meshStandardMaterial color={"#808080"} metalness={0.9} roughness={0.1} />
           
         </mesh>
       ))}
       
-      <ImagePlane
-        position={[0, 0, 1]}
-        scale={1}
-        width={width} // 例: 16:9のアスペクト比
-        height={height}
-      />
+      
     </group>
   )
 }
