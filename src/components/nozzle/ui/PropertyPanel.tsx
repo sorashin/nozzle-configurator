@@ -33,7 +33,7 @@ export const PropertyPanel: React.FC = () => {
         <input
           type="range"
           min={3}
-          max={5}
+          max={10}
           step={0.1}
           value={nozzleSize}
           onChange={(e) => {
