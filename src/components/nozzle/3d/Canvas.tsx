@@ -3,10 +3,6 @@ import { OrbitControls, GizmoViewport, GizmoHelper, Environment, Stage } from "@
 
 import { useModularStore } from "@/stores/modular"
 import Model from "./Model"
-import { useEffect } from "react"
-import { Object3D } from "three"
-import { Board } from "./elements/Board"
-import { ImagePlane } from "./elements/ImagePlane"
 
 const Canvas = () => {
   
@@ -18,7 +14,7 @@ const Canvas = () => {
     <div className="flex-1">
       <ThreeCanvas
         camera={{
-          position: [0, 0, 100],
+          position: [0, 50, 100],
           fov: 45,
           near: 0.1,
           far: 1000,
@@ -45,10 +41,10 @@ const Canvas = () => {
           enablePan={true}
           enableZoom={true}
           zoomSpeed={0.5}
-          minPolarAngle={Math.PI / 3}
-          maxPolarAngle={(Math.PI * 2) / 3}
-          minAzimuthAngle={-Math.PI / 3}
-          maxAzimuthAngle={Math.PI / 3}
+          minPolarAngle={0}
+          maxPolarAngle={Math.PI}
+          minAzimuthAngle={-Math.PI}
+          maxAzimuthAngle={Math.PI}
           maxDistance={900} // カメラの最大ズームアウト距離を200に制限
         />
 

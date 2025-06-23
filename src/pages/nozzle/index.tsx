@@ -19,7 +19,7 @@ export function Page() {
         <RangeSlider 
           min={3} 
           max={10} 
-          step={0.5}
+          step={0.1}
           label={"nozzleSize"} 
           position={"right"} 
         />

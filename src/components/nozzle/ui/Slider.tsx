@@ -43,7 +43,7 @@ export const RangeSlider: React.FC<RangeSliderProps> = (props) => {
   const rulerRange = 400
 
   // 扇状の目盛りのために
-  const tickCount = max - min // より細かい目盛り
+  const tickCount = Math.round((max - min) / step) // stepに基づいて目盛りの数を計算
   const arcAngle = 240 // 扇の角度範囲（度）
   const arcRadius = 1200 // 扇の半径
 
@@ -128,15 +128,15 @@ export const RangeSlider: React.FC<RangeSliderProps> = (props) => {
     const centerAngleOffset = valueRatio * arcAngle - arcAngle / 2
 
     // 扇状に配置するための目盛りの配列を生成
-    const ticks = Array.from({ length: tickCount }, (_, i) => {
-      const tickValue = min + (i / (tickCount - 1)) * (max - min)
+    const ticks = Array.from({ length: tickCount + 1 }, (_, i) => {
+      const tickValue = min + i * step
       const isCurrent =
-        Math.abs(tickValue - value) < (max - min) / (tickCount - 1) / 2
+        Math.abs(tickValue - value) < step / 2
 
       // 扇状の配置を計算（現在の値が中央に来るように回転）
       const baseAngle =
         -arcAngle / 2 +
-        (arcAngle / (tickCount - 1)) * i +
+        (arcAngle / tickCount) * i +
         baseAngleOffset(position)
       const angleInDegrees = baseAngle - centerAngleOffset
 
@@ -164,9 +164,9 @@ export const RangeSlider: React.FC<RangeSliderProps> = (props) => {
       // 目盛りの長さを調整
       const tickLength = isCurrent
         ? 64
-        : Math.round(tickValue) % 10 === 0
+        : Math.round(tickValue * 10) % 10 === 0
         ? 16
-        : Math.round(tickValue) % 5 === 0
+        : Math.round(tickValue * 10) % 5 === 0
         ? 8
         : 4
 
@@ -189,7 +189,7 @@ export const RangeSlider: React.FC<RangeSliderProps> = (props) => {
           />
 
           {/* 数字は10の倍数の場合のみ表示 */}
-          {Math.round(tickValue) % 10 === 0 && !isCurrent && (
+          {Math.round(tickValue * 10) % 10 === 0 && !isCurrent && (
             <span
               className={`
                 text-xs text-content-m-a px-1
@@ -206,7 +206,7 @@ export const RangeSlider: React.FC<RangeSliderProps> = (props) => {
                 right: isVertical ? undefined : "10px",
                 bottom: isVertical ? "10px" : undefined,
               }}>
-              {Math.round(tickValue)}
+              {Math.round(tickValue * 10) / 10}
             </span>
           )}
         </div>
@@ -400,7 +400,7 @@ export const RangeSlider: React.FC<RangeSliderProps> = (props) => {
             </span>
           </p>
           {isCurrentlyDragging && <RulerTicks />}
-          {/* <RulerTicks /> */}
+          <RulerTicks />
         </div>
       </div>
     </>
