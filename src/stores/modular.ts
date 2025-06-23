@@ -44,7 +44,7 @@ interface ModularState {
   evaluateGraph: () => Promise<void>;
   updateNodeProperty: (id: string, value: number | string) => void;
   //↓いらないかも
-  getNodeProperty: (label: string) => { id: string; outputs: any } | null;
+  getNodeProperty: (label: string) => { id: string; outputs: unknown } | null;
 }
 
 // 必要に応じてグラフを動的にインポートする関数
@@ -83,7 +83,7 @@ export const useModularStore = create<ModularState>((set, get) => ({
   },
 
   loadGraph: async (slug = 'gridfinity') => {
-    const { modular, setNodes, setGeometries, setInputNodeId, setNodeIds } = get();
+    const { modular, setNodes, setInputNodeId, setNodeIds } = get();
     if (!modular) return;
     
     try {

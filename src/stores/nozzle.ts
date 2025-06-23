@@ -10,9 +10,9 @@ interface NozzleStore {
   height:number,
   mounting:Mounting,
   cover:number,
-  thickness:number,
-  backboard:number,
-  updateNozzle: (params: { type?: number, width?: number, height?: number, mounting?: Mounting, cover?: number, thickness?: number, backboard?: number }) => void;
+  holeSize:number,
+  nozzleSize:number,
+  updateNozzle: (params: { type?: number, width?: number, height?: number, mounting?: Mounting, cover?: number, holeSize?: number, nozzleSize?: number }) => void;
   
 }
 
@@ -29,7 +29,7 @@ export const useNozzleStore = create<NozzleStore>((set) => ({
   height:142,
   mounting:"stand",
   cover:0,
-  thickness:0.3,
-  backboard:3,
+  holeSize:0.1,
+  nozzleSize:3.5,
   updateNozzle: (params) => set(params),
 }));

@@ -7,15 +7,16 @@ import { useModularStore } from "@/stores/modular"
 interface RangeSliderProps {
   min: number
   max: number
-  label: "" | "width" | "height" | "depth"
+  step?: number
+  label: "" | "width" | "height" | "depth" | "holeSize" | "nozzleSize"
   position: "top" | "left" | "right" | "bottom"
 }
 
 export const RangeSlider: React.FC<RangeSliderProps> = (props) => {
-  const { max, min, label, position } = props
-  const { width, height, updateNozzle } = useNozzleStore()
+  const { max, min, step = 1, label, position } = props
+  const { width, height, holeSize, nozzleSize, updateNozzle } = useNozzleStore()
   const nozzleState = useNozzleStore((state) => state)
-  const { inputNodeId, updateNodeProperty } = useModularStore()
+  const { inputNodeId, nodeIds, updateNodeProperty } = useModularStore()
   const { setActiveAxis, activeAxis } = useSettingsStore()
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -26,13 +27,16 @@ export const RangeSlider: React.FC<RangeSliderProps> = (props) => {
         return width
       case "height":
         return height
+      case "holeSize":
+        return holeSize
+      case "nozzleSize":
+        return nozzleSize
       default:
         return 105
     }
   }
 
   const [value, setValue] = useState(getInitialValue()) // 現在の設定値
-  const [yPos, setYPos] = useState(0) // 現在のボーダー幅
   const [startY, setStartY] = useState(0) // ドラッグ開始時のY座標
   const [startX, setStartX] = useState(0) // ドラッグ開始時のX座標
   const { setCameraMode, setIsDragging, isDragging } = useSettingsStore()
@@ -70,20 +74,18 @@ export const RangeSlider: React.FC<RangeSliderProps> = (props) => {
       const diffY = startY - currentPos // 方向を反転（マイナスをつけない）
       const newYPos = Math.max(-rulerRange, Math.min(rulerRange, diffY))
       const mappedValue =
-        Math.round(((newYPos + rulerRange) / (rulerRange * 2)) * (max - min)) +
+        Math.round(((newYPos + rulerRange) / (rulerRange * 2)) * (max - min) / step) * step +
         min
 
       setValue(mappedValue)
-      setYPos(newYPos)
     } else {
       const diffX = startX - currentPos // 方向を反転（マイナスをつけない）
       const newXPos = Math.max(-rulerRange, Math.min(rulerRange, diffX))
       const mappedValue =
-        Math.round(((newXPos + rulerRange) / (rulerRange * 2)) * (max - min)) +
+        Math.round(((newXPos + rulerRange) / (rulerRange * 2)) * (max - min) / step) * step +
         min
 
       setValue(mappedValue)
-      setYPos(newXPos) // yPosを再利用
     }
   }
 
@@ -95,6 +97,8 @@ export const RangeSlider: React.FC<RangeSliderProps> = (props) => {
       updateNozzle({
         width: label === "width" ? numericValue : undefined,
         height: label === "height" ? numericValue : undefined,
+        holeSize: label === "holeSize" ? numericValue : undefined,
+        nozzleSize: label === "nozzleSize" ? numericValue : undefined,
       })
       
     } else {
@@ -321,8 +325,15 @@ export const RangeSlider: React.FC<RangeSliderProps> = (props) => {
               //   width: label === "width" ? value : undefined,
               //   height: label === "height" ? value : undefined,
               // })
-              updateNozzle(label === "width"? {width: value}: label === "height"?{height: value}:{} )
-              
+              updateNozzle({
+                width: label === "width" ? value : undefined,
+                height: label === "height" ? value : undefined,
+                holeSize: label === "holeSize" ? value : undefined,
+                nozzleSize: label === "nozzleSize" ? value : undefined,
+              })
+              if (label === "holeSize" || label === "nozzleSize") {
+                updateNodeProperty(label === "holeSize" ? nodeIds.holeSize : nodeIds.nozzleSize, value)
+              }
             }
           }}
           onMouseUp={() => {
@@ -351,7 +362,12 @@ export const RangeSlider: React.FC<RangeSliderProps> = (props) => {
               updateNozzle({
                 width: label === "width" ? value : undefined,
                 height: label === "height" ? value : undefined,
+                holeSize: label === "holeSize" ? value : undefined,
+                nozzleSize: label === "nozzleSize" ? value : undefined,
               })
+              if (label === "holeSize" || label === "nozzleSize") {
+                updateNodeProperty(label === "holeSize" ? nodeIds.holeSize : nodeIds.nozzleSize, value)
+              }
             }
           }}
           onTouchEnd={() => {

@@ -57,8 +57,8 @@ interface SettingsState {
   setIsSettingsOpen: (isSettingsOpen: boolean) => void;
   isDragging: boolean;
   setIsDragging: (isDragging: boolean) => void;
-  activeAxis: 'width' | 'depth' | 'height'|'';
-  setActiveAxis: (activeAxis: 'width' | 'depth' | 'height'|'') => void;
+  activeAxis: 'width' | 'depth' | 'height' | 'holeSize' | 'nozzleSize' | '';
+  setActiveAxis: (activeAxis: 'width' | 'depth' | 'height' | 'holeSize' | 'nozzleSize' | '') => void;
   bom:number
   setBom: (bom: number) => void;
   isPreviewLoad: boolean;
@@ -106,7 +106,7 @@ export const useSettingsStore = create<SettingsState>()((set) => ({
   isDragging: false,
   setIsDragging: (isDragging: boolean) => set({ isDragging }),
   activeAxis: '',
-  setActiveAxis: (activeAxis: 'width' | 'depth' | 'height'|'') => set({ activeAxis }),
+  setActiveAxis: (activeAxis: 'width' | 'depth' | 'height' | 'holeSize' | 'nozzleSize' | '') => set({ activeAxis }),
   bom: 0,
   setBom: (bom: number) => set({ bom }),
   isPreviewLoad: false,
