@@ -3,7 +3,7 @@ import { create } from 'zustand';
 export type Mounting = "stand"|"wall";
 
 
-interface FrameStore {
+interface NozzleStore {
   // 状態
   type:number,
   width:number,
@@ -12,7 +12,7 @@ interface FrameStore {
   cover:number,
   thickness:number,
   backboard:number,
-  updateFrame: (params: { type?: number, width?: number, height?: number, mounting?: Mounting, cover?: number, thickness?: number, backboard?: number }) => void;
+  updateNozzle: (params: { type?: number, width?: number, height?: number, mounting?: Mounting, cover?: number, thickness?: number, backboard?: number }) => void;
   
 }
 
@@ -22,7 +22,7 @@ interface FrameStore {
 
 
 // Zustand ストアを作成
-export const useFrameStore = create<FrameStore>((set) => ({
+export const useNozzleStore = create<NozzleStore>((set) => ({
   // 初期状態
   type:0,
   width:72,
@@ -31,5 +31,5 @@ export const useFrameStore = create<FrameStore>((set) => ({
   cover:0,
   thickness:0.3,
   backboard:3,
-  updateFrame: (params) => set(params),
+  updateNozzle: (params) => set(params),
 }));

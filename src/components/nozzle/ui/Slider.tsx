@@ -1,5 +1,5 @@
 import { useSettingsStore } from "@/stores/settings"
-import {  useFrameStore } from "@/stores/frame"
+import {  useNozzleStore } from "@/stores/nozzle"
 import { useEffect, useRef, useState } from "react"
 import Icon from "./Icon"
 import { useModularStore } from "@/stores/modular"
@@ -13,8 +13,8 @@ interface RangeSliderProps {
 
 export const RangeSlider: React.FC<RangeSliderProps> = (props) => {
   const { max, min, label, position } = props
-  const { width, height, updateFrame } = useFrameStore()
-  const frameState = useFrameStore((state) => state)
+  const { width, height, updateNozzle } = useNozzleStore()
+  const nozzleState = useNozzleStore((state) => state)
   const { inputNodeId, updateNodeProperty } = useModularStore()
   const { setActiveAxis, activeAxis } = useSettingsStore()
   const inputRef = useRef<HTMLInputElement>(null)
@@ -92,7 +92,7 @@ export const RangeSlider: React.FC<RangeSliderProps> = (props) => {
     if (/^\d*$/.test(newValue)) {
       // 数字のみを許可
       const numericValue = Math.floor(Number(newValue)) // 小数点以下を切り捨て
-      updateFrame({
+      updateNozzle({
         width: label === "width" ? numericValue : undefined,
         height: label === "height" ? numericValue : undefined,
       })
@@ -301,7 +301,7 @@ export const RangeSlider: React.FC<RangeSliderProps> = (props) => {
           onMouseDown={(e) => {
             updateNodeProperty(
               inputNodeId!,
-              `{"frameStore":${JSON.stringify(frameState)}}`
+              `{"nozzleStore":${JSON.stringify(nozzleState)}}`
             )
             setIsDragging(true)
             setActiveAxis(label)
@@ -321,7 +321,7 @@ export const RangeSlider: React.FC<RangeSliderProps> = (props) => {
               //   width: label === "width" ? value : undefined,
               //   height: label === "height" ? value : undefined,
               // })
-              updateFrame(label === "width"? {width: value}: label === "height"?{height: value}:{} )
+              updateNozzle(label === "width"? {width: value}: label === "height"?{height: value}:{} )
               
             }
           }}
@@ -332,7 +332,7 @@ export const RangeSlider: React.FC<RangeSliderProps> = (props) => {
             setCameraMode("perspective")
             updateNodeProperty(
               inputNodeId!,
-              `{"frameStore":${JSON.stringify(frameState)}}`
+              `{"nozzleStore":${JSON.stringify(nozzleState)}}`
             )
           }}
           onTouchStart={(e) => {
@@ -348,7 +348,7 @@ export const RangeSlider: React.FC<RangeSliderProps> = (props) => {
                   ? e.touches[0].clientY
                   : e.touches[0].clientX
               )
-              updateFrame({
+              updateNozzle({
                 width: label === "width" ? value : undefined,
                 height: label === "height" ? value : undefined,
               })
@@ -360,7 +360,7 @@ export const RangeSlider: React.FC<RangeSliderProps> = (props) => {
             setCameraMode("perspective")
             updateNodeProperty(
               inputNodeId!,
-              `{"frameStore":${JSON.stringify(frameState)}}`
+              `{"nozzleStore":${JSON.stringify(nozzleState)}}`
             )
           }}
         />

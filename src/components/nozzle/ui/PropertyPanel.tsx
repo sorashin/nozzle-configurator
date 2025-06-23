@@ -10,12 +10,12 @@ import {
   Object3D,
   Mesh as ThreeMesh,
 } from "three"
-import { useFrameStore } from "@/stores/frame"
+import { useNozzleStore } from "@/stores/nozzle"
 
 
 export const PropertyPanel: React.FC = () => {
   const {manifoldGeometries} = useModularStore()
-  const {width,height} = useFrameStore((state) => state)
+  const {width,height} = useNozzleStore((state) => state)
   const handleDownload = (geometry:ManifoldGeometriesWithInfo) => {
     const mesh = new ThreeMesh(
       geometry.geometry,

@@ -52,7 +52,7 @@ const Canvas = () => {
 
         
         <Board
-          position={[0, 0, -9.95]}
+          position={[0, 0, -10]}
           scale={10}
           rotation={[0, Math.PI / 2, 0]}
         />

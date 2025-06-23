@@ -4,7 +4,6 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Navigate,
   useParams,
 } from "react-router-dom"
 import ReactGA from "react-ga4"
@@ -18,11 +17,14 @@ const NotFound = () => (
 
 // 動的インポートを静的にするためのマッピングオブジェクトを作成
 const pageComponents: Record<string, () => Promise<{ default: React.ComponentType }>> = {
-  frame: () =>
-    import("./pages/frame/index").then((module) => ({
+  root: () =>
+    import("./pages/root/index").then((module) => ({
       default: module.Page,
     })),
-  
+  nozzle: () =>
+    import("./pages/nozzle/index").then((module) => ({
+      default: module.Page,
+    })),
 }
 
 // ModularInitializerコンポーネント - modularの初期化だけを担当
@@ -73,7 +75,8 @@ const GAInitializer = memo(({ slug }: { slug?: string }) => {
 // PageLoaderコンポーネント - memoを削除してslugの変更に確実に反応するように
 const PageLoader = ({ slug }: { slug: string }) => {
   const PageComponent = lazy(() => {
-    const loader = pageComponents[slug]
+    const key = slug || "root"
+    const loader = pageComponents[key]
     return loader ? loader() : Promise.resolve({ default: NotFound })
   })
 
@@ -124,7 +127,7 @@ function App() {
     <div className="flex flex-col h-screen w-screen">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Navigate to="/frame" replace />} />
+          <Route path="/" element={<GraphRenderer />} />
           <Route path="/:slug" element={<GraphRenderer />} />
         </Routes>
       </BrowserRouter>

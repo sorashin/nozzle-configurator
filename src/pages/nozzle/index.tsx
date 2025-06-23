@@ -1,24 +1,24 @@
-import Canvas from "@/components/frame/3d/Canvas"
+import Canvas from "@/components/nozzle/3d/Canvas"
 
 import { useModularStore } from "@/stores/modular"
-import { useFrameStore } from "@/stores/frame"
+import { usenozzleStore } from "@/stores/nozzle"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { useSettingsStore } from "@/stores/settings"
 import { useParams } from "react-router-dom"
 import Module from "manifold-3d"
 import { geometry2mesh, mesh2geometry } from "@/utils/geometryUtils"
-import { PropertyPanel } from "@/components/frame/ui/PropertyPanel"
+import { PropertyPanel } from "@/components/nozzle/ui/PropertyPanel"
 import { BufferGeometry } from "three"
-import { RangeSlider } from "@/components/frame/ui/Slider"
+import { RangeSlider } from "@/components/nozzle/ui/Slider"
 
 
 export function Page() {
-  const frameState = useFrameStore()
+  const nozzleState = usenozzleStore()
   const { setIsPreviewLoad } = useSettingsStore((state) => state)
   const { inputNodeId, updateNodeProperty, geometries } = useModularStore(
     (state) => state
   )
-  const { updateFrame } = useFrameStore((state) => state)
+  const { updatenozzle } = usenozzleStore((state) => state)
   const { slug } = useParams<{ slug: string }>()
   const [manifoldModule, setManifoldModule] = useState<Awaited<
     ReturnType<typeof Module>
@@ -28,13 +28,13 @@ export function Page() {
   )
 
   const handleDLView = useCallback(() => {
-    console.log("frameStore state:", frameState)
+    console.log("nozzleStore state:", nozzleState)
     if (!inputNodeId) return
 
     try {
       updateNodeProperty(
         inputNodeId!,
-        `{"frameStore":${JSON.stringify(frameState)}}`
+        `{"nozzleStore":${JSON.stringify(nozzleState)}}`
       )
     } finally {
       // 少し遅延を入れてUIの更新が完了するのを待つ
@@ -44,26 +44,26 @@ export function Page() {
         
       }, 300)
     }
-  }, [inputNodeId, frameState])
+  }, [inputNodeId, nozzleState])
 
   const processGeometries = useMemo(() => {
-    if (!manifoldModule || slug !== "frame") return null
+    if (!manifoldModule || slug !== "nozzle") return null
 
     const { Manifold, Mesh } = manifoldModule
-    const frameGeometries = geometries
+    const nozzleGeometries = geometries
       .filter((geometry) =>
-        ["frame","screw","backBoard","stand"].some((key) => geometry.label?.includes(key))
+        ["nozzle"].some((key) => geometry.label?.includes(key))
       )
       .sort((a, b) => {
         const numA = parseInt(a.label?.match(/\d+/)?.[0] || "0")
         const numB = parseInt(b.label?.match(/\d+/)?.[0] || "0")
         return numA - numB
       })
-    console.log("frameGeometries", frameGeometries)
-    if (frameGeometries.length < 2) return null
+    console.log("nozzleGeometries", nozzleGeometries)
+    if (nozzleGeometries.length < 2) return null
 
     try {
-      const manifolds = frameGeometries.map((geometry) => {
+      const manifolds = nozzleGeometries.map((geometry) => {
         try {
           const { vertProperties, triVerts } = geometry2mesh(geometry.geometry)
           const mesh = new Mesh({ numProp: 3, vertProperties, triVerts })
@@ -81,30 +81,30 @@ export function Page() {
         }
       })
 
-      // frameの処理
-      const frame001Index = frameGeometries.findIndex(
-        (g) => g.label === "frame001"
+      // nozzleの処理
+      const nozzle001Index = nozzleGeometries.findIndex(
+        (g) => g.label === "nozzle001"
       )
-      const frame002s = frameGeometries.filter((g) => g.label === "frame002")
-      const frame002Manifolds = frame002s.map((g) => {
+      const nozzle002s = nozzleGeometries.filter((g) => g.label === "nozzle002")
+      const nozzle002Manifolds = nozzle002s.map((g) => {
         const { vertProperties, triVerts } = geometry2mesh(g.geometry)
         const mesh = new Mesh({ numProp: 3, vertProperties, triVerts })
         mesh.merge()
         return new Manifold(mesh)
       })
 
-      let frameResult = manifolds[frame001Index]
-      for (const frame002 of frame002Manifolds) {
-        frameResult = Manifold.difference(frameResult!, frame002)
+      let nozzleResult = manifolds[nozzle001Index]
+      for (const nozzle002 of nozzle002Manifolds) {
+        nozzleResult = Manifold.difference(nozzleResult!, nozzle002)
       }
       // backBoardの処理
-      const backBoard001Index = frameGeometries.findIndex(
+      const backBoard001Index = nozzleGeometries.findIndex(
         (g) => g.label === "backBoard001"
       )
-      const backBoard003Index = frameGeometries.findIndex(
+      const backBoard003Index = nozzleGeometries.findIndex(
         (g) => g.label === "backBoard003"
       )
-      const backBoard002s = frameGeometries.filter(
+      const backBoard002s = nozzleGeometries.filter(
         (g) => g.label === "backBoard002"
       )
       const backBoard002Manifolds = backBoard002s.map((g) => {
@@ -125,19 +125,19 @@ export function Page() {
       )
 
       // screwのジオメトリを取得
-      const screwGeometry = frameGeometries.find(
+      const screwGeometry = nozzleGeometries.find(
         (g) => g.label === "screw"
       )?.geometry
       // standのジオメトリを取得
-      const standGeometries = frameGeometries.filter(
+      const standGeometries = nozzleGeometries.filter(
         (g) => g.label === "stand"
       ).map(g => g.geometry)
 
       return [
         {
-          label: "frame",
-          id: "frame",
-          geometry: mesh2geometry(frameResult!.getMesh()),
+          label: "nozzle",
+          id: "nozzle",
+          geometry: mesh2geometry(nozzleResult!.getMesh()),
         },
         {
           label: "backBoard",
@@ -163,7 +163,7 @@ export function Page() {
 
   //processTrayGeometry内でmanifoldGeometriesを更新してはいけないのでuseEffectで実行
   useEffect(() => {
-    if (slug === "frame" && processGeometries) {
+    if (slug === "nozzle" && processGeometries) {
       setManifoldGeometries(
         processGeometries.filter(
           (g): g is { label: string; id: string; geometry: BufferGeometry } => g.geometry !== undefined
