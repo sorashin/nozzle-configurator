@@ -6,12 +6,9 @@
     <title>Redirecting...</title>
     <script>
       // GitHub Pages SPA redirect workaround
-      const path = window.location.pathname.replace('/tecdia', '')
-      const query = window.location.search
-      const hash = window.location.hash
-      
-      window.location.replace('/tecdia/' + (path || '') + query + hash)
+      sessionStorage.redirect = location.href
     </script>
+    <meta http-equiv="refresh" content="0;URL='/tecdia/'">
   </head>
   <body>
     <p>Redirecting...</p>
