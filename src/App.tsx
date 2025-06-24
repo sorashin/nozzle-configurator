@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect, memo } from "react"
 import { useModularStore } from "@/stores/modular"
 import {
-  BrowserRouter,
+  HashRouter,
   Routes,
   Route,
   useParams,
@@ -135,12 +135,12 @@ const RootRenderer = () => {
 function App() {
   return (
     <div className="flex flex-col h-screen w-screen">
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<RootRenderer />} />
           <Route path="/:slug" element={<GraphRenderer />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   )
 }
