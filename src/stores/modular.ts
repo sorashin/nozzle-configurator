@@ -88,7 +88,7 @@ export const useModularStore = create<ModularState>((set, get) => ({
     set({ modular: Modular.new() });
   },
 
-  loadGraph: async (slug = 'gridfinity') => {
+  loadGraph: async (slug = 'nozzle') => {
     const { modular, setNodes, setInputNodeId, setNodeIds } = get();
     if (!modular) return;
     

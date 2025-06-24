@@ -1,4 +1,7 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
     font-family: 'F5.6';
     src: url('./assets/fonts/F5.6-Regular.woff') format('woff');
@@ -7,7 +10,6 @@
     font-family: 'Marcellus';
     src: url('./assets/fonts/Marcellus-Regular.ttf') format('truetype');
 }
-@tailwind utilities;
 
 @layer base {
   :root {
@@ -237,7 +239,7 @@
     height: 100%;
     color: var(--color-content-h);
     transition: all 0.2s;
-    border-radius: 0.125rem;
+    @apply rounded-md;
     cursor: pointer;
   }
   
@@ -251,6 +253,7 @@
     color: var(--color-primary);
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     /* border-radius: 0.125rem; */
+    
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -261,39 +264,59 @@
     /* border: 1px solid transparent; */
     cursor: pointer;
   }
+  
+  /* INPUT */
+  .t-input[type="number"],
+  .t-input[type="text"] {
+    @apply flex h-8 flex-row items-center rounded-md border-none bg-content-xxl-a px-2 text-sm focus:outline-none focus:ring-[0.5px] focus:ring-content-l;
+    /* inputのスピンボタンを消す */
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    -moz-appearance: textfield;
+  }
 
-  .t-input input[type="range"] {
+  .t-input input[type="range"],
+  .custom-slider {
     -webkit-appearance: none;
     appearance: none;
-    height: 4px;
+    height: 2px;
     flex: 1;
-    background-color: var(--color-content-xxl);
-    border-radius: 9999px;
+    background: linear-gradient(to right, 
+      var(--color-content-h) 0%, 
+      var(--color-content-h) var(--progress, 50%), 
+      var(--color-content-xxl) var(--progress, 50%), 
+      var(--color-content-xxl) 100%);
+    border-radius: 0;
     outline: none;
     pointer-events: auto;
     max-width: 320px;
   }
 
-  .t-input input[type="range"]::-webkit-slider-thumb {
+  .t-input input[type="range"]::-webkit-slider-thumb,
+  .custom-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 16px;
+    width: 2px;
     height: 16px;
     background-color: var(--color-content-h);
-    border-radius: 9999px;
+    border-radius: 0;
     cursor: pointer;
-    border: 2px solid white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    border: none;
+    box-shadow: none;
   }
 
-  .t-input input[type="range"]::-moz-range-thumb {
-    width: 16px;
+  .t-input input[type="range"]::-moz-range-thumb,
+  .custom-slider::-moz-range-thumb {
+    width: 2px;
     height: 16px;
     background-color: var(--color-content-h);
-    border-radius: 9999px;
+    border-radius: 0;
     cursor: pointer;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    border: none;
+    box-shadow: none;
   }
 
   .t-input-range:hover::-webkit-slider-thumb {

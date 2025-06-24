@@ -1,7 +1,7 @@
 import Canvas from "@/components/nozzle/3d/Canvas"
 
 import { PropertyPanel } from "@/components/nozzle/ui/PropertyPanel"
-import { RangeSlider } from "@/components/nozzle/ui/Slider"
+
 
 
 export function Page() {

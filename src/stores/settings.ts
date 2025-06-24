@@ -19,6 +19,13 @@ export interface FillamentState {
   series:string;
   color:Color;
 }
+export interface PropertyHoverState {
+  length:boolean;
+  outerSize:boolean;
+  tipInnerSize:boolean;
+  tipOuterSize:boolean;
+  needleLength:boolean;
+}
 export interface Color {
   name:string;
   sampleImage:string;
@@ -65,6 +72,8 @@ interface SettingsState {
   setIsPreviewLoad: (isPreviewLoad: boolean) => void;
   currentFillament:FillamentState;
   setFillament: (fillament:FillamentState) => void;
+  propertyHover:PropertyHoverState;
+  setPropertyHover: (propertyHover:PropertyHoverState) => void;
 }
 
 export const useSettingsStore = create<SettingsState>()((set) => ({
@@ -125,5 +134,13 @@ export const useSettingsStore = create<SettingsState>()((set) => ({
     }
   },
   setFillament: (fillament:FillamentState) => set({ currentFillament:fillament }),
+  propertyHover:{
+    length:false,
+    outerSize:false,
+    tipInnerSize:false,
+    tipOuterSize:false,
+    needleLength:false,
+  },
+  setPropertyHover: (propertyHover:PropertyHoverState) => set({ propertyHover }),
 }));
 

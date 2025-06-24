@@ -136,10 +136,10 @@ const Dim3d: React.FC<Dim3dProps> = ({
       {/* ラベルテキスト */}
       <Text
         color={active ? "#4597F7" : "#999"}
-        anchorX={anchorX}
-        anchorY={anchorY}
+        anchorX={"center"}
+        anchorY={"bottom-baseline"}
         position={labelPosition}
-        fontSize={4}
+        fontSize={2}
         rotation={labelRotation}>
         {value}
       </Text>

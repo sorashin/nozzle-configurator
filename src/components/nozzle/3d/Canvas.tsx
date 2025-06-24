@@ -1,5 +1,5 @@
 import { Canvas as ThreeCanvas } from "@react-three/fiber"
-import { OrbitControls, GizmoViewport, GizmoHelper, Environment, Stage } from "@react-three/drei"
+import { OrbitControls, GizmoViewport, GizmoHelper, Environment, ContactShadows, Stage } from "@react-three/drei"
 
 import { useModularStore } from "@/stores/modular"
 import Model from "./Model"
@@ -14,21 +14,44 @@ const Canvas = () => {
     <div className="flex-1">
       <ThreeCanvas
         camera={{
-          position: [50, 50, 0],
+          position: [0, 50, 50],
           fov: 45,
           near: 0.1,
           far: 1000,
         }}
         frameloop="demand">
-        <ambientLight intensity={1.8} />
+        {/* 3点照明設定 */}
+        <ambientLight intensity={0.2} />
+        
+        {/* キーライト（メイン照明） */}
         <directionalLight
           position={[10, 10, 10]}
-          intensity={1}
+          intensity={1.2}
           castShadow={false}
         />
-        <Environment preset="studio" />
+        
+        {/* フィルライト（影を和らげる） */}
+        <directionalLight
+          position={[-5, 5, 5]}
+          intensity={0.6}
+          castShadow={false}
+        />
+        
+        {/* リムライト（輪郭を強調） */}
+        <directionalLight
+          position={[0, 5, -10]}
+          intensity={0.8}
+          castShadow={false}
+        />
+
+        <Environment 
+          preset="warehouse" 
+          background={false}
+          blur={0.1}
+        />
         <color attach="background" args={["#d9d9d9"]} />
-        {/* <fog attach="fog" args={["#d9d9d9", 400, 1000]} /> */}
+        
+        
         <GizmoHelper margin={[50, 100]} alignment="bottom-right" scale={0.5}>
           <GizmoViewport
             axisColors={["hotpink", "aquamarine", "#3498DB"]}
@@ -47,16 +70,15 @@ const Canvas = () => {
           maxAzimuthAngle={Math.PI}
           maxDistance={900} // カメラの最大ズームアウト距離を200に制限
         />
-
-        
         <Stage
-          intensity={0}
-          preset="rembrandt"
-          adjustCamera={2}
-          scale={1}
-          shadows={false}>
-          <Model geometries={geometries} />
-        </Stage>
+            intensity={0}
+            preset="rembrandt"
+            adjustCamera={false}
+            scale={1}
+            shadows={false}>
+
+        <Model geometries={geometries} />
+            </Stage>
       </ThreeCanvas>
     </div>
   )

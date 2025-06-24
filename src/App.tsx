@@ -36,8 +36,9 @@ const ModularInitializer = memo(({ slug }: { slug?: string }) => {
   }, [])
 
   useEffect(() => {
-    if (modular && slug) {
-      loadGraph(slug)
+    if (modular) {
+      // slugが未定義の場合はデフォルトで'nozzle'を使用
+      loadGraph(slug || 'nozzle')
     }
   }, [modular, slug, loadGraph])
 
