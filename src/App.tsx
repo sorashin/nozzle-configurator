@@ -17,10 +17,7 @@ const NotFound = () => (
 
 // 動的インポートを静的にするためのマッピングオブジェクトを作成
 const pageComponents: Record<string, () => Promise<{ default: React.ComponentType }>> = {
-  root: () =>
-    import("./pages/root/index").then((module) => ({
-      default: module.Page,
-    })),
+
   nozzle: () =>
     import("./pages/nozzle/index").then((module) => ({
       default: module.Page,
@@ -75,7 +72,7 @@ const GAInitializer = memo(({ slug }: { slug?: string }) => {
 // PageLoaderコンポーネント - memoを削除してslugの変更に確実に反応するように
 const PageLoader = ({ slug }: { slug: string }) => {
   const PageComponent = lazy(() => {
-    const key = slug || "root"
+    const key = slug || "nozzle"
     const loader = pageComponents[key]
     return loader ? loader() : Promise.resolve({ default: NotFound })
   })

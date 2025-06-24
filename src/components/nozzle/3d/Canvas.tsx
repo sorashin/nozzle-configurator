@@ -14,7 +14,7 @@ const Canvas = () => {
     <div className="flex-1">
       <ThreeCanvas
         camera={{
-          position: [0, 50, 100],
+          position: [50, 50, 0],
           fov: 45,
           near: 0.1,
           far: 1000,

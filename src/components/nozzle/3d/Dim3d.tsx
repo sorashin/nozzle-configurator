@@ -107,7 +107,7 @@ const Dim3d: React.FC<Dim3dProps> = ({
 
   // テキストのアンカー位置を設定
   const anchorX = isXYPlane(label) ? "center" : "left"
-  const anchorY = isXYPlane(label) ? "top" : "middle"
+  const anchorY = "middle"
 
   // 寸法線のポイント配列
   const points = [midAC, midBD]
@@ -141,7 +141,7 @@ const Dim3d: React.FC<Dim3dProps> = ({
         position={labelPosition}
         fontSize={4}
         rotation={labelRotation}>
-        {label.charAt(0).toUpperCase() + ":" + value}
+        {value}
       </Text>
     </>
   )

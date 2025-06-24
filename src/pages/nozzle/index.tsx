@@ -8,7 +8,7 @@ export function Page() {
   return (
     <>
       <PropertyPanel />
-      <div className="absolute inset-0  z-10 pointer-events-none">
+      {/* <div className="absolute inset-0  z-10 pointer-events-none">
         <RangeSlider
           min={0}
           max={1}
@@ -23,7 +23,7 @@ export function Page() {
           label={"nozzleSize"} 
           position={"right"} 
         />
-      </div>
+      </div> */}
       <Canvas />
     </>
   )
