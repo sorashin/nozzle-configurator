@@ -116,7 +116,18 @@ const GraphRenderer = () => {
       <ModularInitializer slug={slug} />
       <GAInitializer slug={slug} />
       {/* keyプロパティを追加して、slugが変わるたびにPageLoaderが再マウントされるようにする */}
-      <PageLoader key={slug} slug={slug || ""} />
+      <PageLoader key={slug} slug={slug || "nozzle"} />
+    </>
+  )
+}
+
+// RootRendererコンポーネント - ルートパス用
+const RootRenderer = () => {
+  return (
+    <>
+      <ModularInitializer slug="nozzle" />
+      <GAInitializer slug="nozzle" />
+      <PageLoader key="nozzle" slug="nozzle" />
     </>
   )
 }
@@ -126,7 +137,7 @@ function App() {
     <div className="flex flex-col h-screen w-screen">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<GraphRenderer />} />
+          <Route path="/" element={<RootRenderer />} />
           <Route path="/:slug" element={<GraphRenderer />} />
         </Routes>
       </BrowserRouter>
