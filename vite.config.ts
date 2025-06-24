@@ -19,5 +19,5 @@ export default defineConfig({
 			'@': '/src',
 		},
 	},
-  base: process.env.NODE_ENV === 'production' ? '/techdia/' : '/',
+  base: process.env.NODE_ENV === 'production' ? '/tecdia/' : '/',
 })
