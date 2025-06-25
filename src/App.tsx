@@ -37,8 +37,8 @@ const ModularInitializer = memo(({ slug }: { slug?: string }) => {
 
   useEffect(() => {
     if (modular) {
-      // GitHub Pagesのベースパス(/tecdia/)を除外し、適切なslugを使用
-      const actualSlug = slug === 'tecdia' || !slug ? 'nozzle' : slug
+      // GitHub Pagesのベースパス(/nozzle-configurator/)を除外し、適切なslugを使用
+      const actualSlug = slug === 'nozzle-configurator' || !slug ? 'nozzle' : slug
       loadGraph(actualSlug)
     }
   }, [modular, slug, loadGraph])
