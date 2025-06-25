@@ -1,32 +1,16 @@
 name = "nozzle-configurator"
 compatibility_date = "2024-06-25"
-compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "dist"
 
-[env.production]
-name = "nozzle-configurator"
+# Build configuration
+build = { command = "yarn build" }
 
-[build]
-command = "yarn build"
-cwd = "."
-
-[build.upload]
-format = "directory"
-dir = "./dist"
-
-[[env.production.routes]]
-pattern = "*"
-custom_domain = true
-
-# WASM support
-[vars]
+# Environment variables
+[env.production.vars]
 NODE_ENV = "production"
 CLOUDFLARE_PAGES = "true"
 
-# WebAssembly compatibility
-[wasm]
-bindings = []
-
-# Functions configuration
+# Functions configuration for WASM support
 [functions]
 compatibility_date = "2024-06-25"
 compatibility_flags = ["nodejs_compat"]
