@@ -74,6 +74,8 @@ interface SettingsState {
   setFillament: (fillament:FillamentState) => void;
   propertyHover:PropertyHoverState;
   setPropertyHover: (propertyHover:PropertyHoverState) => void;
+  isRulerOn:boolean;
+  setIsRulerOn: (isRulerOn: boolean) => void;
 }
 
 export const useSettingsStore = create<SettingsState>()((set) => ({
@@ -142,5 +144,7 @@ export const useSettingsStore = create<SettingsState>()((set) => ({
     needleLength:false,
   },
   setPropertyHover: (propertyHover:PropertyHoverState) => set({ propertyHover }),
+  isRulerOn:false,
+  setIsRulerOn: (isRulerOn: boolean) => set({ isRulerOn }),
 }));
 

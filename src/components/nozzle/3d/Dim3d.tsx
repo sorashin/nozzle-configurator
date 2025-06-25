@@ -1,6 +1,7 @@
 import React from "react"
 import { Vector3 } from "three"
 import { Line, Text } from "@react-three/drei"
+import { useSettingsStore } from "@/stores/settings"
 
 interface Dim3dProps {
   pointA: [number, number, number] | Vector3
@@ -11,6 +12,7 @@ interface Dim3dProps {
   lineWidth?: number
   active: boolean
   offset?: number // オフセット値を設定するプロパティ
+  
 }
 
 // ラベルタイプの判定ヘルパー
@@ -28,7 +30,9 @@ const Dim3d: React.FC<Dim3dProps> = ({
   color = active ? "#4597F7" : "#999",
   lineWidth = active ? 2 : 1,
   offset = 10, // デフォルトオフセット値
+  
 }) => {
+  const {isRulerOn} = useSettingsStore()
   // Vector3オブジェクトに変換
   const vecA = pointA instanceof Vector3 ? pointA : new Vector3(...pointA)
   const vecB = pointB instanceof Vector3 ? pointB : new Vector3(...pointB)
@@ -113,37 +117,40 @@ const Dim3d: React.FC<Dim3dProps> = ({
   const points = [midAC, midBD]
 
   return (
-    <>
-      {/* 寸法線 */}
-      <Line points={points} color={color} lineWidth={lineWidth} />
+    
+    (isRulerOn && (
+      <>
+        {/* 寸法線 */}
+        <Line points={points} color={color} lineWidth={lineWidth} />
 
-      {/* 補助線1: A to C */}
-      <Line
-        points={[vecA, vecC]}
-        color={color}
-        lineWidth={lineWidth}
-        dashed={false}
-      />
+        {/* 補助線1: A to C */}
+        <Line
+          points={[vecA, vecC]}
+          color={color}
+          lineWidth={lineWidth}
+          dashed={false}
+        />
 
-      {/* 補助線2: B to D */}
-      <Line
-        points={[vecB, vecD]}
-        color={color}
-        lineWidth={lineWidth}
-        dashed={false}
-      />
+        {/* 補助線2: B to D */}
+        <Line
+          points={[vecB, vecD]}
+          color={color}
+          lineWidth={lineWidth}
+          dashed={false}
+        />
 
-      {/* ラベルテキスト */}
-      <Text
-        color={active ? "#4597F7" : "#999"}
-        anchorX={"center"}
-        anchorY={"bottom-baseline"}
-        position={labelPosition}
-        fontSize={2}
-        rotation={labelRotation}>
-        {value}
-      </Text>
-    </>
+        {/* ラベルテキスト */}
+        <Text
+          color={active ? "#4597F7" : "#999"}
+          anchorX={"center"}
+          anchorY={"bottom-baseline"}
+          position={labelPosition}
+          fontSize={2}
+          rotation={labelRotation}>
+          {value}
+        </Text>
+      </>
+    ))
   )
 }
 

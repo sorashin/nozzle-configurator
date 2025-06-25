@@ -1,6 +1,7 @@
 import React, { useMemo } from "react"
 import { Vector3 } from "three"
 import { Line, Text } from "@react-three/drei"
+import { useSettingsStore } from "@/stores/settings"
 
 interface CircleDim3dProps {
   centerPosition: [number, number, number] | Vector3
@@ -23,6 +24,7 @@ const CircleDim3d: React.FC<CircleDim3dProps> = ({
   textOffset = 10,
   position = 'tl'
 }) => {
+  const {isRulerOn} = useSettingsStore()
   // diameterからradiusを計算
   const radius = diameter / 2
   // Vector3オブジェクトに変換
@@ -77,6 +79,7 @@ const CircleDim3d: React.FC<CircleDim3dProps> = ({
   const distance = 3
 
   return (
+    isRulerOn&&(
     <>
       {/* 円の描画 */}
       <Line points={circlePoints} color={color} lineWidth={lineWidth} />
@@ -104,6 +107,7 @@ const CircleDim3d: React.FC<CircleDim3dProps> = ({
         Φ {diameter?.toFixed(1) || '0.0'}
       </Text>
     </>
+    )
   )
 }
 

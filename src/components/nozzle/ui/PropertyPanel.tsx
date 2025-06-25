@@ -108,7 +108,7 @@ export const PropertyPanel: React.FC = () => {
             </span>
           </div>
           <CustomSlider
-            min={4}
+            min={6}
             max={10}
             step={0.1}
             value={outerSize}
@@ -223,13 +223,13 @@ export const PropertyPanel: React.FC = () => {
             }}
           />
         </div>
-        <a
+        {/* <a
           className="border-[1px] border-content-h-a px-4 py-2 text-sm hover:bg-content-h-a hover:text-content-dark-h-a w-full mt-2 transition-all text-center"
           href={"https://docs.google.com/forms/d/e/1FAIpQLSf5L-INqDqmH0yHtx1aOoFguA1MpkODBXZIua-5Bm2t3KBU6Q/viewform"}
           target={"_blank"}
           >
           ORDER
-        </a>
+        </a> */}
 
         <Tooltip
           id="hint-tooltip"
