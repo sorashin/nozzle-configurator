@@ -25,7 +25,7 @@ export function Page() {
       <a href="https://nodi3d.com" target="_blank"
         className="absolute bottom-8 right-8 text-content-m-a text-xs flex items-center justify-center z-10 gap-2"
       >
-          Powered by 
+          Made with 
           <Icon name="nodi3d" className="h-5 w-fit"/>
       </a>
       <Canvas />
