@@ -19,5 +19,5 @@ export default defineConfig({
 			'@': '/src',
 		},
 	},
-  base: process.env.CLOUDFLARE_PAGES ? '/' : process.env.NODE_ENV === 'production' ? '/nozzle-configurator/' : '/',
+  base: process.env.NODE_ENV === 'production' ? '/nozzle-configurator/' : '/',
 })
