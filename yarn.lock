@@ -6863,10 +6863,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nodi-modular@npm:^0.0.18":
-  version: 0.0.18
-  resolution: "nodi-modular@npm:0.0.18"
-  checksum: 10c0/5700839360fc1c849cdbec754545f0411e9374cc63e72d57ae27e9705146e5d016e8be9dc216363086f0ff7473158113de2ce41541c5e9f7d8c035563b9b0749
+"nodi-modular@npm:^0.0.20":
+  version: 0.0.20
+  resolution: "nodi-modular@npm:0.0.20"
+  checksum: 10c0/9a1a8096189f3f20f236137c6f35f40ddb2fd66d52b7acabbdd4451fc9117e5e297110033c80af7f253d0f92bd4046acf402f01efe2813ed676030c0b5992c6b
   languageName: node
   linkType: hard
 
@@ -6918,7 +6918,7 @@ __metadata:
     immer: "npm:^10.1.1"
     leva: "npm:^0.10.0"
     manifold-3d: "npm:^3.1.0"
-    nodi-modular: "npm:^0.0.18"
+    nodi-modular: "npm:^0.0.20"
     postcss: "npm:^8.5.6"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"

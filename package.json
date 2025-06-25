@@ -19,7 +19,7 @@
     "immer": "^10.1.1",
     "leva": "^0.10.0",
     "manifold-3d": "^3.1.0",
-    "nodi-modular": "^0.0.18",
+    "nodi-modular": "^0.0.20",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-ga4": "^2.1.0",
