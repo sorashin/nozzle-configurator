@@ -1,1 +1,11 @@
+# Static assets should be served directly
+/assets/* 200
+/favicon.* 200
+/glb/* 200
+/images/* 200
+/materials/* 200
+/wasm/* 200
+/vite.svg 200
+
+# SPA fallback for all other routes
 /* /index.html 200
