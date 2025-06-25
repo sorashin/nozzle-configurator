@@ -1,11 +1,2 @@
-# Static assets should be served directly
-/nozzle-configurator/assets/* 200
-/nozzle-configurator/favicon.* 200
-/nozzle-configurator/glb/* 200
-/nozzle-configurator/images/* 200
-/nozzle-configurator/materials/* 200
-/nozzle-configurator/wasm/* 200
-/nozzle-configurator/vite.svg 200
-
-# SPA fallback for all other routes
-/nozzle-configurator/* /nozzle-configurator/index.html 200
+# SPA fallback for all routes
+/* /index.html 200
