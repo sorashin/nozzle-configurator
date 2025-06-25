@@ -15,3 +15,8 @@ dir = "./dist"
 [[env.production.routes]]
 pattern = "*"
 custom_domain = true
+
+# WASM support
+[vars]
+NODE_ENV = "production"
+CLOUDFLARE_PAGES = "true"

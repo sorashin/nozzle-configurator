@@ -2,12 +2,20 @@
   Cross-Origin-Embedder-Policy: require-corp
   Cross-Origin-Opener-Policy: same-origin
 
-/wasm/*
+/assets/*.wasm
+  Content-Type: application/wasm
   Cross-Origin-Embedder-Policy: require-corp
   Cross-Origin-Opener-Policy: same-origin
   Cache-Control: public, max-age=31536000, immutable
 
 /*.wasm
+  Content-Type: application/wasm
+  Cross-Origin-Embedder-Policy: require-corp
+  Cross-Origin-Opener-Policy: same-origin
+  Cache-Control: public, max-age=31536000, immutable
+
+/wasm/*
+  Content-Type: application/wasm
   Cross-Origin-Embedder-Policy: require-corp
   Cross-Origin-Opener-Policy: same-origin
   Cache-Control: public, max-age=31536000, immutable
