@@ -52,7 +52,7 @@ const Canvas = () => {
         <color attach="background" args={["#d9d9d9"]} />
         
         
-        <GizmoHelper margin={[50, 100]} alignment="bottom-right" scale={0.5}>
+        <GizmoHelper margin={[50, 100]} alignment="bottom-left" scale={0.5}>
           <GizmoViewport
             axisColors={["hotpink", "aquamarine", "#3498DB"]}
             labelColor="black"

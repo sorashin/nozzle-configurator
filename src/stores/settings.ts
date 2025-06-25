@@ -144,7 +144,7 @@ export const useSettingsStore = create<SettingsState>()((set) => ({
     needleLength:false,
   },
   setPropertyHover: (propertyHover:PropertyHoverState) => set({ propertyHover }),
-  isRulerOn:false,
+  isRulerOn:true,
   setIsRulerOn: (isRulerOn: boolean) => set({ isRulerOn }),
 }));
 
