@@ -9,6 +9,7 @@ import {
 import ReactGA from "react-ga4"
 import { useSettingsStore } from "./stores/settings"
 import { useNavigationStore } from "./stores/navigation"
+import Icon from "./components/nozzle/ui/Icon"
 
 // NotFoundコンポーネント作成
 const NotFound = () => (
@@ -82,8 +83,8 @@ const PageLoader = ({ slug }: { slug: string }) => {
   return (
     <Suspense
       fallback={
-        <div className="flex-1 flex items-center justify-center gap-1 flex-col">
-          <img src="/images/loading.gif" alt="loading" className="size-24" />
+        <div className="flex-1 flex items-center justify-center gap-1 flex-col bg-content-xl">
+          <Icon name="nozzle_load" className="size-16" />
           <span
             className="text-xs animate-pulse"
             style={{
@@ -92,14 +93,7 @@ const PageLoader = ({ slug }: { slug: string }) => {
             }}>
             loading...
           </span>
-          <style>{`
-            @keyframes blink {
-              0%, 100% { opacity: 1; }
-              25% { opacity: 0.3; }
-              50% { opacity: 0.7; }
-              75% { opacity: 0.2; }
-            }
-          `}</style>
+          
         </div>
       }>
       <PageComponent />

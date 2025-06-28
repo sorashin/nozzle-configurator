@@ -225,7 +225,7 @@ export const PropertyPanel: React.FC = () => {
         </div>
         <a
           className="border-[1px] border-content-h-a px-4 py-2 text-sm hover:bg-content-h-a hover:text-content-dark-h-a w-full mt-2 transition-all text-center"
-          href={"https://docs.google.com/forms/d/e/1FAIpQLSf5L-INqDqmH0yHtx1aOoFguA1MpkODBXZIua-5Bm2t3KBU6Q/viewform"}
+          href={`https://docs.google.com/forms/d/e/1FAIpQLSf5L-INqDqmH0yHtx1aOoFguA1MpkODBXZIua-5Bm2t3KBU6Q/viewform?usp=pp_url&entry.1225353679=${encodeURIComponent(length)}&entry.11693644=${encodeURIComponent(outerSize)}&entry.1455151050=${encodeURIComponent(tipInnerSize)}&entry.300096431=${encodeURIComponent(tipOuterSize)}&entry.1298909336=${encodeURIComponent(needleLength)}`}
           target={"_blank"}
           >
           ORDER
