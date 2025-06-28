@@ -293,6 +293,9 @@
     outline: none;
     pointer-events: auto;
     max-width: 320px;
+    touch-action: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .t-input input[type="range"]::-webkit-slider-thumb,

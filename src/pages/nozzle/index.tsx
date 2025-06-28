@@ -23,7 +23,7 @@ export function Page() {
         </button>
       </div> */}
       <a href="https://nodi3d.com" target="_blank"
-        className="absolute bottom-8 right-8 text-content-m-a text-xs flex items-center justify-center z-10 gap-2"
+        className="absolute bottom-8 right-0 md:right-8 text-content-m-a text-xs flex items-center justify-center z-10 gap-0 md:gap-2"
       >
           Made with 
           <Icon name="nodi3d" className="h-5 w-fit"/>

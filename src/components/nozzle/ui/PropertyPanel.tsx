@@ -21,12 +21,12 @@ export const PropertyPanel: React.FC = () => {
       updateNodeProperty(nodeIds.tipOuterSize, tipOuterSize)
       updateNodeProperty(nodeIds.needleLength, needleLength)
     }
-  },[length,outerSize,tipInnerSize,tipOuterSize,needleLength])  
+  },[length,outerSize,tipInnerSize,tipOuterSize,needleLength,nodeIds])  
 
   return (
     <>
       <motion.div
-        className={`absolute h-auto top-8 left-0 md:left-8 w-full md:w-64 p-4 md:py-2 z-20 rounded-md backdrop-blur-sm flex flex-col gap-2 items-center justify-center font-serif text-content-h-a`}
+        className={`absolute h-auto top-2 md:top-8 left-0 md:left-8 w-full md:w-64 p-4 py-0 md:py-2 z-20 rounded-md backdrop-blur-sm flex flex-col gap-2 items-center justify-center font-serif text-content-h-a`}
         layout>
         <div className="grid grid-cols-[minmax(0,_1fr)_repeat(2,_minmax(62px,_1fr))] gap-2 items-center w-full">
           <label className="text-sm" htmlFor="material">
