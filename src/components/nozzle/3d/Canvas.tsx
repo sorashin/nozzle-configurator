@@ -11,7 +11,7 @@ const Canvas = () => {
   )
   
   return (
-    <div className="flex-1">
+    <div className="flex-1 absolute top-0 left-0 w-full h-full">
       <ThreeCanvas
         camera={{
           position: [0, 50, 50],
@@ -51,8 +51,7 @@ const Canvas = () => {
         />
         <color attach="background" args={["#d9d9d9"]} />
         
-        
-        <GizmoHelper margin={[50, 100]} alignment="bottom-left" scale={0.5}>
+        <GizmoHelper alignment="bottom-left" scale={0.5}>
           <GizmoViewport
             axisColors={["hotpink", "aquamarine", "#3498DB"]}
             labelColor="black"
