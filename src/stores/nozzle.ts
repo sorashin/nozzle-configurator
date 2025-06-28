@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 
-
 export type Material = "bronze"|"high-wear-steel";
 
 interface NozzleStore {
